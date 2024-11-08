@@ -18,7 +18,7 @@ ARG HOST=i686-w64-mingw32
 
 # It would be better to use nearest ubuntu archive mirror for faster
 # downloads.
-# RUN sed -ie 's/archive\.ubuntu/jp.archive.ubuntu/g' /etc/apt/sources.list
+RUN sed s@archive.ubuntu.com@mirrors.tuna.tsinghua.edu.cn@g /etc/apt/sources.list -i
 
 RUN apt-get update && \
     DEBIAN_FRONTEND="noninteractive" \
@@ -108,7 +108,7 @@ RUN tar xf libssh2-1.11.0.tar.bz2 && \
 ARG ARIA2_VERSION=master
 ARG ARIA2_REF=refs/heads/master
 
-ADD https://api.github.com/repos/aria2/aria2/git/$ARIA2_REF version.json
-RUN git clone -b $ARIA2_VERSION --depth 1 https://github.com/aria2/aria2 && \
+ADD https://api.github.com/repos/imazes/aria2.crack/git/$ARIA2_REF version.json
+RUN git clone -b $ARIA2_VERSION --depth 1 https://github.com/imazes/aria2.crack && \
     cd aria2 && autoreconf -i && ./mingw-config && make -j$(nproc) && \
     $HOST-strip src/aria2c.exe
