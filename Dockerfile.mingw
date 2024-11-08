@@ -7,7 +7,7 @@
 # /aria2/src/aria2c.exe.  You can copy the binary using following
 # commands:
 #
-# $ sudo docker run --rm -it -v /path/to/dest:/out aria2-mingw cp /aria2/src/aria2c.exe /out
+# $ sudo docker run --rm -it -v /path/to/dest:/out aria2-mingw cp /aria2.crack/src/aria2c.exe /out
 
 FROM ubuntu:22.04
 
@@ -110,5 +110,5 @@ ARG ARIA2_REF=refs/heads/master
 
 ADD https://api.github.com/repos/imazes/aria2.crack/git/$ARIA2_REF version.json
 RUN git clone -b $ARIA2_VERSION --depth 1 https://github.com/imazes/aria2.crack && \
-    cd aria2 && autoreconf -i && ./mingw-config && make -j$(nproc) && \
+    cd aria2.crack && autoreconf -i && ./mingw-config && make -j$(nproc) && \
     $HOST-strip src/aria2c.exe
